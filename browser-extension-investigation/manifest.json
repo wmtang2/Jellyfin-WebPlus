@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "Jellyfin Movie Attributes",
+  "version": "0.1.0",
+  "description": "Displays additional movie file attributes (size, filename, container, resolution) in Jellyfin web UI.",
+  "permissions": [
+    "storage",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*/web/index.html*", "*://*/index.html*", "*://*/web/*"],
+      "js": [
+        "src/cardEnhancer.js",
+        "src/apiClient.js", 
+        "src/settings.js",
+        "src/orchestrator.js",
+        "src/observer.js",
+        "src/reEnhancer.js",
+        "contentScript.js"
+      ],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}

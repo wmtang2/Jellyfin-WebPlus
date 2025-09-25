@@ -1,0 +1,11 @@
+.movie-attributes {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  line-height: 1.2;
+  margin-top: 2px;
+  word-break: break-word;
+}
+
+.movie-attributes:hover {
+  opacity: 1;
+}

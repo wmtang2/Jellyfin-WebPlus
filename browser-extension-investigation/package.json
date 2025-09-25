@@ -1,0 +1,15 @@
+{
+  "name": "jellyfin-movie-attributes-extension",
+  "version": "0.1.0",
+  "description": "Firefox extension to show extra movie attributes in Jellyfin",
+  "main": "src/cardEnhancer.js",
+  "scripts": {
+    "test": "jest",
+    "build": "node scripts/build-zip.js"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^30.1.2",
+    "jsdom": "^22.0.0"
+  }
+}
