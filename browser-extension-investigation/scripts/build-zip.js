@@ -12,6 +12,8 @@ if (!fs.existsSync(distDir)) fs.mkdirSync(distDir);
 const filesToInclude = [
   'manifest.json',
   'contentScript.js',
+  'options.html',
+  'options.js',
   'styles.css',
   'src',
   'LICENSE'
