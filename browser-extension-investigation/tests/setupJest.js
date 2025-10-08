@@ -21,3 +21,13 @@ window.browser = {
 };
 
 global.browser = window.browser;
+// Polyfill TextEncoder for jsdom
+if (typeof global.TextEncoder === 'undefined') {
+  const { TextEncoder } = require('util');
+  global.TextEncoder = TextEncoder;
+}
+// Polyfill TextDecoder for jsdom
+if (typeof global.TextDecoder === 'undefined') {
+  const { TextDecoder } = require('util');
+  global.TextDecoder = TextDecoder;
+}

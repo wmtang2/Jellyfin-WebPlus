@@ -6,7 +6,7 @@
 async function enhanceMovieCards(config) {
   const { baseUrl, token, options = {}, fields = ['Path', 'MediaSources'] } = config || {};
   if (!baseUrl) throw new Error('baseUrl required');
-  const { findMovieCards, buildAttributesList, addAttributesToCard } = window.JellyfinExtension.cardEnhancer;
+  const { findMovieCards, buildAttributesList, addAttributesToCard, addActionButtonsToCard } = window.JellyfinExtension.cardEnhancer;
   const cards = findMovieCards();
   let enhancedCount = 0;
   const work = [];
@@ -57,11 +57,15 @@ async function enhanceMovieCards(config) {
       const attrs = buildAttributesList(item, options);
       console.log('[Jellyfin Extension] Built attributes:', attrs);
       
-      const inserted = addAttributesToCard(card, attrs);
+      const inserted = addAttributesToCard(card, attrs, options);
       console.log('[Jellyfin Extension] Inserted attributes:', inserted);
       
+      // Add action buttons if enabled
+      const buttonsInserted = addActionButtonsToCard(card, id, options);
+      console.log('[Jellyfin Extension] Inserted action buttons:', buttonsInserted);
+      
       card.setAttribute('data-enhanced', '1');
-      if (inserted) enhancedCount += 1;
+      if (inserted || buttonsInserted) enhancedCount += 1;
     } catch (e) {
       console.error('[Jellyfin Extension] Error processing card:', e);
       card.setAttribute('data-enhanced-error', '1');

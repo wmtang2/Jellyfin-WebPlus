@@ -44,9 +44,12 @@ async function fetchItemDetails(itemId, options) {
   const fetchFn = fetchImpl || (typeof fetch !== 'undefined' ? fetch : null);
   const accessToken = getAccessTokenFromLocalStorage();
   if (!accessToken) {
+    console.error('[Jellyfin Extension] No AccessToken found in localStorage');
     throw new Error('No AccessToken found in localStorage');
   }
   if (!fetchFn) throw new Error('No fetch implementation available');
+  console.log('[Jellyfin Extension] Using AccessToken:', accessToken);
+  console.log('[Jellyfin Extension] Using baseUrl:', baseUrl);
 
   const key = makeCacheKey(itemId, fields);
   if (!forceRefresh && cache.has(key)) {
@@ -68,7 +71,9 @@ async function fetchItemDetails(itemId, options) {
   url += `?${query}`;
 
   const headers = {};
-  if (token) headers['X-Emby-Token'] = token; // Jellyfin compatibility
+  // Always set X-Emby-Token for compatibility
+  headers['X-Emby-Token'] = accessToken;
+  if (token) headers['X-Emby-Token'] = token;
 
   const p = (async () => {
     const res = await fetchFn(url, { headers });

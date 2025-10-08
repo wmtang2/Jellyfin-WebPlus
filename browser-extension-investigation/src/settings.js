@@ -9,7 +9,9 @@ const defaultSettings = Object.freeze({
   showContainer: true,
   showResolution: true,
   showHDR: true,
-  showAudioLanguage: true
+  showAudioLanguage: true,
+  showDeleteButton: false,
+  showIdentifyButton: false
 });
 
 let current = { ...defaultSettings };

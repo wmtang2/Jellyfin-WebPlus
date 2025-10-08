@@ -9,7 +9,9 @@ const defaultSettings = {
   showContainer: true,
   showResolution: true,
   showHDR: true,
-  showAudioLanguage: true
+  showAudioLanguage: true,
+  showDeleteButton: false,
+  showIdentifyButton: false
 };
 
 // Load settings from storage and update UI
@@ -25,6 +27,8 @@ async function loadSettings() {
     document.getElementById('showResolution').checked = settings.showResolution;
     document.getElementById('showHDR').checked = settings.showHDR;
     document.getElementById('showAudioLanguage').checked = settings.showAudioLanguage;
+    document.getElementById('showDeleteButton').checked = settings.showDeleteButton;
+    document.getElementById('showIdentifyButton').checked = settings.showIdentifyButton;
   } catch (error) {
     console.error('Failed to load settings:', error);
   }
@@ -39,7 +43,9 @@ async function saveSettings() {
       showContainer: document.getElementById('showContainer').checked,
       showResolution: document.getElementById('showResolution').checked,
       showHDR: document.getElementById('showHDR').checked,
-      showAudioLanguage: document.getElementById('showAudioLanguage').checked
+      showAudioLanguage: document.getElementById('showAudioLanguage').checked,
+      showDeleteButton: document.getElementById('showDeleteButton').checked,
+      showIdentifyButton: document.getElementById('showIdentifyButton').checked
     };
     
     await browser.storage.local.set({ [STORAGE_KEY]: settings });

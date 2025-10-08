@@ -8,7 +8,7 @@ async function reEnhanceCards(config) {
   if (!baseUrl) throw new Error('baseUrl required');
   const cards = Array.from(document.querySelectorAll('.card[data-type="Movie"][data-enhanced="1"]'));
   if (cards.length === 0) return 0;
-  const { buildAttributesList, addAttributesToCard } = window.JellyfinExtension.cardEnhancer;
+  const { buildAttributesList, addAttributesToCard, addActionButtonsToCard } = window.JellyfinExtension.cardEnhancer;
   const { fetchItemDetails } = window.JellyfinExtension.apiClient;
   const { getSettings } = window.JellyfinExtension.settings;
   const opts = getSettings();
@@ -22,8 +22,13 @@ async function reEnhanceCards(config) {
       // Replace existing attributes node
       const existing = card.querySelector('.movie-attributes');
       if (existing) existing.remove();
-      const inserted = addAttributesToCard(card, attrs);
-      if (inserted) updated += 1;
+      // Replace existing action buttons
+      const existingButtons = card.querySelector('.movie-action-buttons');
+      if (existingButtons) existingButtons.remove();
+      
+      const inserted = addAttributesToCard(card, attrs, opts);
+      const buttonsInserted = addActionButtonsToCard(card, id, opts);
+      if (inserted || buttonsInserted) updated += 1;
     } catch (_) {
       // Silent; could add error flag if needed
     }

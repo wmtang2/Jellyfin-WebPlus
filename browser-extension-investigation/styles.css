@@ -9,3 +9,73 @@
 .movie-attributes:hover {
   opacity: 1;
 }
+
+/* Action buttons container */
+.movie-action-buttons {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 100;
+}
+
+/* Individual action buttons */
+.jellyfin-action-btn {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  line-height: 1.2;
+  min-width: 0;
+  white-space: nowrap;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 101;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.jellyfin-action-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: #bbb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.jellyfin-action-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Delete button specific styling */
+.jellyfin-delete-btn {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.jellyfin-delete-btn:hover {
+  background: #dc3545;
+  color: white;
+  border-color: #c82333;
+}
+
+/* Identify button specific styling */
+.jellyfin-identify-btn {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.jellyfin-identify-btn:hover {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
