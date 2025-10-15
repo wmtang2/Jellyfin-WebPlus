@@ -796,11 +796,12 @@ function triggerIdentifyDialog(itemId) {
           }
           
           if (!identifyOption) {
-            // Try to find by text content
+            // Try to find by text content - look specifically for "identify" only
             const allMenuItems = document.querySelectorAll('.menuItem, .listItem, .contextMenuItem, .menu-item, [role="menuitem"]');
             for (const item of allMenuItems) {
               const text = item.textContent?.toLowerCase() || '';
-              if (text.includes('identify') || text.includes('edit metadata')) {
+              // Match "identify" but not "edit" to avoid matching "Edit metadata"
+              if (text.includes('identify') && !text.includes('edit')) {
                 identifyOption = item;
                 console.log('[Jellyfin Extension] Found identify option by text:', item);
                 break;
