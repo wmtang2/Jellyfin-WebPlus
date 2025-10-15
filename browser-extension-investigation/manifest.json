@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Jellyfin Movie Attributes",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Displays additional movie file attributes (size, filename, container, resolution) in Jellyfin web UI.",
   "permissions": [
     "storage",
