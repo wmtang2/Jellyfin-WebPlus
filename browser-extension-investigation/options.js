@@ -17,7 +17,7 @@ const defaultSettings = {
 // Load settings from storage and update UI
 async function loadSettings() {
   try {
-    const result = await browser.storage.local.get(STORAGE_KEY);
+    const result = await chrome.storage.local.get(STORAGE_KEY);
     const settings = result[STORAGE_KEY] || defaultSettings;
     
     // Update checkboxes
@@ -48,7 +48,7 @@ async function saveSettings() {
       showIdentifyButton: document.getElementById('showIdentifyButton').checked
     };
     
-    await browser.storage.local.set({ [STORAGE_KEY]: settings });
+    await chrome.storage.local.set({ [STORAGE_KEY]: settings });
     showStatus('Settings saved successfully!');
   } catch (error) {
     console.error('Failed to save settings:', error);

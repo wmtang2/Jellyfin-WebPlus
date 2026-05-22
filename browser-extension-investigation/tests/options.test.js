@@ -5,8 +5,8 @@
  * @jest-environment jsdom
  */
 
-// Mock browser API for options page
-Object.defineProperty(global, 'browser', {
+// Mock chrome API for options page
+Object.defineProperty(global, 'chrome', {
   value: {
     storage: {
       local: {
@@ -57,7 +57,7 @@ describe('options page functionality', () => {
     jest.resetAllMocks();
     
     // Mock successful storage operations
-    global.browser.storage.local.get.mockResolvedValue({
+    global.chrome.storage.local.get.mockResolvedValue({
       movieAttributesSettings: {
         showFileSize: true,
         showFileName: false,
@@ -67,7 +67,7 @@ describe('options page functionality', () => {
         showAudioLanguage: false
       }
     });
-    global.browser.storage.local.set.mockResolvedValue();
+    global.chrome.storage.local.set.mockResolvedValue();
   });
   
   test('should load settings from storage and update checkboxes', async () => {
@@ -83,7 +83,7 @@ describe('options page functionality', () => {
     // Wait for async operations
     await new Promise(resolve => setTimeout(resolve, 0));
     
-    expect(global.browser.storage.local.get).toHaveBeenCalledWith('movieAttributesSettings');
+    expect(global.chrome.storage.local.get).toHaveBeenCalledWith('movieAttributesSettings');
     expect(document.getElementById('showFileSize').checked).toBe(true);
     expect(document.getElementById('showFileName').checked).toBe(false);
     expect(document.getElementById('showContainer').checked).toBe(true);
@@ -113,7 +113,7 @@ describe('options page functionality', () => {
     // Wait for async save
     await new Promise(resolve => setTimeout(resolve, 0));
     
-    expect(global.browser.storage.local.set).toHaveBeenCalledWith({
+    expect(global.chrome.storage.local.set).toHaveBeenCalledWith({
       movieAttributesSettings: {
         showFileSize: true,
         showFileName: true,
@@ -127,7 +127,7 @@ describe('options page functionality', () => {
   
   test('should handle storage errors gracefully', async () => {
     // Mock storage failure
-    global.browser.storage.local.get.mockRejectedValue(new Error('Storage error'));
+    global.chrome.storage.local.get.mockRejectedValue(new Error('Storage error'));
     
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
     

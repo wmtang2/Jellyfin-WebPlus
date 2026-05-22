@@ -1,8 +1,8 @@
 // tests/setupJest.js
 // Setup file for Jest (jsdom)
 
-// Polyfill browser APIs if needed
-window.browser = {
+// Polyfill chrome APIs if needed
+window.chrome = {
   runtime: { onMessage: { addListener: jest.fn() }, sendMessage: jest.fn() },
   storage: { 
     sync: { 
@@ -20,7 +20,7 @@ window.browser = {
   tabs: { query: jest.fn(), sendMessage: jest.fn() }
 };
 
-global.browser = window.browser;
+global.chrome = window.chrome;
 // Polyfill TextEncoder for jsdom
 if (typeof global.TextEncoder === 'undefined') {
   const { TextEncoder } = require('util');

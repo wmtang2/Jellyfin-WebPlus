@@ -20,7 +20,7 @@ const listeners = new Set();
 
 // Check if browser storage is available
 try {
-  isStorageAvailable = typeof browser !== 'undefined' && browser.storage && browser.storage.local;
+  isStorageAvailable = typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local;
 } catch (e) {
   isStorageAvailable = false;
 }
@@ -42,7 +42,7 @@ function updateSettings(patch) {
   
   // Save to storage asynchronously (fire and forget)
   if (isStorageAvailable) {
-    browser.storage.local.set({ [STORAGE_KEY]: current }).catch(error => {
+    chrome.storage.local.set({ [STORAGE_KEY]: current }).catch(error => {
       console.error('Failed to save settings to storage:', error);
     });
   }
@@ -62,7 +62,7 @@ async function loadSettingsFromStorage() {
   if (!isStorageAvailable) return;
   
   try {
-    const result = await browser.storage.local.get(STORAGE_KEY);
+    const result = await chrome.storage.local.get(STORAGE_KEY);
     const stored = result[STORAGE_KEY];
     if (stored && typeof stored === 'object') {
       // Merge with defaults to handle missing keys
@@ -81,7 +81,7 @@ async function loadSettingsFromStorage() {
 function initStorageListener() {
   if (!isStorageAvailable) return;
   
-  browser.storage.onChanged.addListener((changes, areaName) => {
+  chrome.storage.onChanged.addListener((changes, areaName) => {
     if (areaName === 'local' && changes[STORAGE_KEY]) {
       const newSettings = changes[STORAGE_KEY].newValue;
       if (newSettings && typeof newSettings === 'object') {
